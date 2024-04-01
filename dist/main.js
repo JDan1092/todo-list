@@ -1,0 +1,1 @@
+console.log("testing index.js webpack. Is it working? Yes it is.");
