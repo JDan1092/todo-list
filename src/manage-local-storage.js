@@ -1,6 +1,6 @@
 import { displayToDo } from "./dom-manip.js"
 
-export function saveToDoLocal({ Title, Description, DueDate, Priority, CheckList }) {
+export function saveToDoLocal({ Title, Description, DueDate, Priority }, CheckList) {
     console.log("Saving object to local storage....");
     localStorage.setItem("Title", document.getElementById("Title").value);
     localStorage.setItem("Description", document.getElementById("Description").value);
@@ -8,5 +8,5 @@ export function saveToDoLocal({ Title, Description, DueDate, Priority, CheckList
     localStorage.setItem("Priority", document.getElementById("Priority").value);
     localStorage.setItem("CheckList", CheckList);
     displayToDo();
-    return { Title, Description, DueDate, Priority, CheckList };
+    return { Title, Description, DueDate, Priority }, CheckList;
 }

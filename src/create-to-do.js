@@ -1,5 +1,6 @@
 import { compareAsc, format, parseISO, startOfToday } from 'date-fns';
-import { clearForm } from './dom-manip';
+import { clearForm } from './dom-manip.js';
+import { saveToDoLocal } from './manage-local-storage.js'
 
 let toDoArray = [];
 
@@ -22,14 +23,14 @@ export const createToDo = () => {
         return;
     }
 
-    const nodeListCheckList = document.querySelectorAll("li");
-    let CheckListArray = [];
+    const nodeListCheckList = document.querySelectorAll(".form-li");
+    let _CheckListArray = [];
     for (let i = 0; i < nodeListCheckList.length; i++) {
         let strippedCheckList = nodeListCheckList[i].textContent.replace("\u00D7", '');
-        CheckListArray.push(strippedCheckList);
+        _CheckListArray.push(strippedCheckList);
     }
 
-    let CheckList = CheckListArray.join(", ");
+    let CheckList = _CheckListArray.join(", ");
 
     console.log('Called createToDo module...creating todo now');
     console.log({ Title, Description, DueDate, Priority, CheckList });
@@ -38,7 +39,9 @@ export const createToDo = () => {
     toDoArray.push({ Title, Description, DueDate, Priority, CheckList });
     console.log(toDoArray);
 
+    saveToDoLocal({ Title, Description, DueDate, Priority }, CheckList);
+
     clearForm();
 
-    return { Title, Description, DueDate, Priority, CheckList};
+    return { Title, Description, DueDate, Priority }, CheckList;
 }
